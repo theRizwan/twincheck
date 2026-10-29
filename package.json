@@ -1,0 +1,72 @@
+{
+  "name": "twincheck",
+  "version": "0.1.0",
+  "description": "Differential testing for JavaScript libraries: run your code and a trusted reference on generated inputs, shrink any disagreement, and get a ready-to-file report.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theRizwan/twincheck.git"
+  },
+  "homepage": "https://github.com/theRizwan/twincheck#readme",
+  "bugs": {
+    "url": "https://github.com/theRizwan/twincheck/issues"
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "default": "./src/index.js"
+    },
+    "./packs/string-edit": {
+      "types": "./index.d.ts",
+      "default": "./src/packs/string-edit.js"
+    }
+  },
+  "types": "./index.d.ts",
+  "files": [
+    "src",
+    "index.d.ts",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test 'test/*.test.js'",
+    "history": "node examples/magic-string-history.js"
+  },
+  "keywords": [
+    "differential-testing",
+    "property-based-testing",
+    "fuzzing",
+    "fast-check",
+    "oracle",
+    "testing"
+  ],
+  "author": "Muhammad Rizwan Saleem",
+  "license": "MIT",
+  "peerDependencies": {
+    "fast-check": "^4.0.0"
+  },
+  "devDependencies": {
+    "fast-check": "^4.10.2",
+    "magic-string": "^1.4.5",
+    "magic-string-1": [
+      null,
+      null,
+      null,
+      null,
+      [
+        null,
+        null,
+        null,
+        null,
+        "npm:magic-string@1.4.4"
+      ]
+    ],
+    "magic-string-1.2.3": "npm:magic-string@1.2.3",
+    "magic-string-1.4.2": "npm:magic-string@1.4.2",
+    "magic-string-1.4.3": "npm:magic-string@1.4.3",
+    "magic-string-1.4.4": "npm:magic-string@1.4.4"
+  }
+}
