@@ -44,7 +44,8 @@ magic-string 1.2.3
   the replacer receiving an extra `undefined` argument ([#342](https://github.com/Rich-Harris/magic-string/pull/342)).
 - **1.4.3** passes the whole pack.
 - On **1.4.4 and 1.4.5** it finds a regression: an empty match in an empty string is dropped, so
-  `new MagicString('').replace(/x?/, 'b')` gives `''` where `''.replace(/x?/, 'b')` gives `'b'`.
+  `new MagicString('').replace(/x?/, 'b')` gives `''` where `''.replace(/x?/, 'b')` gives `'b'`. Fix proposed upstream in
+  [magic-string#384](https://github.com/Rich-Harris/magic-string/pull/384).
 
 ## How it compares
 
