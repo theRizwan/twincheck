@@ -3,7 +3,7 @@ import assert from 'node:assert/strict'
 import { existsSync, mkdtempSync, readFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
-import { check, twin, TwinMismatchError } from '../src/index.js'
+import { check, formatReport, twin, TwinMismatchError } from '../src/index.js'
 
 const quiet = { corpusDir: false, reportDir: false, seed: 1 }
 
@@ -119,4 +119,33 @@ test('twin throws a TwinMismatchError with a readable summary', () => {
 
 test('rejects a spec without both functions', () => {
   assert.throws(() => check('bad', { ...quiet, input: fc => fc.nat(), subject: n => n }), TypeError)
+})
+
+test('escapes pipes so a value cannot start a new table column', () => {
+  const result = check('pipe', {
+    ...quiet,
+    input: fc => fc.constant('x'),
+    subject: () => 'a|b',
+    reference: () => 'z',
+  })
+  const row = formatReport(result)
+    .split('\n')
+    .find(line => line.startsWith('| Subject |'))
+  assert.ok(row)
+  assert.ok(row.includes('"a\\|b"'))
+})
+
+test('keeps a multi-line error message on a single table row', () => {
+  const result = check('multiline', {
+    ...quiet,
+    input: fc => fc.nat(),
+    subject: () => {
+      throw new Error('boom\nbang')
+    },
+    reference: () => 'ok',
+  })
+  const report = formatReport(result)
+  const row = report.split('\n').find(line => line.startsWith('| Subject |'))
+  assert.ok(row)
+  assert.match(row, /throws Error: boom bang/)
 })
