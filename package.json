@@ -1,6 +1,6 @@
 {
   "name": "twincheck",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Differential testing for JavaScript libraries: run your code and a trusted reference on generated inputs, shrink any disagreement, and get a ready-to-file report.",
   "repository": {
     "type": "git",
