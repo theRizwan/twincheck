@@ -3,6 +3,16 @@ import { join } from 'node:path'
 import fc from 'fast-check'
 import { describe } from './outcome.js'
 
+// Makes a value safe for a Markdown table cell: escapes the code-span
+// backticks, the pipe that would start a new column, and line breaks that
+// would end the row.
+function tableCell(value) {
+  return value
+    .replaceAll('`', '\\`')
+    .replaceAll('|', '\\|')
+    .replace(/\r\n?|\n/g, ' ')
+}
+
 export function formatSummary(result) {
   const { name, failure, seed } = result
   return [
@@ -28,8 +38,8 @@ ${fc.stringify(failure.input)}
 
 | | Outcome |
 |---|---|
-| Subject | \`${describe(failure.subject).replaceAll('`', '\\`')}\` |
-| Reference | \`${describe(failure.reference).replaceAll('`', '\\`')}\` |
+| Subject | \`${tableCell(describe(failure.subject))}\` |
+| Reference | \`${tableCell(describe(failure.reference))}\` |
 
 ## Reproduce
 
