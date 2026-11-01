@@ -149,3 +149,18 @@ test('keeps a multi-line error message on a single table row', () => {
   assert.ok(row)
   assert.match(row, /throws Error: boom bang/)
 })
+
+test('keeps a carriage-return-only message on a single table row', () => {
+  const result = check('carriage return', {
+    ...quiet,
+    input: fc => fc.nat(),
+    subject: () => {
+      throw new Error('boom\rbang')
+    },
+    reference: () => 'ok',
+  })
+  const report = formatReport(result)
+  const row = report.split('\n').find(line => line.startsWith('| Subject |'))
+  assert.ok(row)
+  assert.match(row, /throws Error: boom bang/)
+})

@@ -10,7 +10,7 @@ function tableCell(value) {
   return value
     .replaceAll('`', '\\`')
     .replaceAll('|', '\\|')
-    .replace(/\r?\n/g, ' ')
+    .replace(/\r\n?|\n/g, ' ')
 }
 
 export function formatSummary(result) {
