@@ -5,6 +5,9 @@ Each release is listed here and on [GitHub Releases](https://github.com/theRizwa
 
 ## Unreleased
 
+- The Markdown report keeps an outcome containing backticks inside a single code span, instead of closing the span
+  early (#8 by @bfs2021).
+
 ## 0.1.1 (2026-11-01)
 
 - The Markdown report keeps an outcome containing `|` or a line break inside its table cell (#2, #7 by @bfs2021).
