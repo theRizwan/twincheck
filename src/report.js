@@ -3,14 +3,23 @@ import { join } from 'node:path'
 import fc from 'fast-check'
 import { describe } from './outcome.js'
 
-// Makes a value safe for a Markdown table cell: escapes the code-span
-// backticks, the pipe that would start a new column, and line breaks that
-// would end the row.
+// Makes a value safe for a Markdown table cell: escapes the pipe that would
+// start a new column and line breaks that would end the row.
 function tableCell(value) {
   return value
-    .replaceAll('`', '\\`')
     .replaceAll('|', '\\|')
     .replace(/\r\n?|\n/g, ' ')
+}
+
+// Wraps a value in a Markdown code span. Backslash escapes do not work inside
+// code spans, so the fence uses one more backtick than the longest backtick
+// run in the value, and a space is padded on each side when the value starts
+// or ends with a backtick.
+function codeSpan(value) {
+  const longest = Math.max(0, ...(value.match(/`+/g) ?? []).map(run => run.length))
+  const fence = '`'.repeat(longest + 1)
+  const pad = value.startsWith('`') || value.endsWith('`') ? ' ' : ''
+  return `${fence}${pad}${tableCell(value)}${pad}${fence}`
 }
 
 export function formatSummary(result) {
@@ -38,8 +47,8 @@ ${fc.stringify(failure.input)}
 
 | | Outcome |
 |---|---|
-| Subject | \`${tableCell(describe(failure.subject))}\` |
-| Reference | \`${tableCell(describe(failure.reference))}\` |
+| Subject | ${codeSpan(describe(failure.subject))} |
+| Reference | ${codeSpan(describe(failure.reference))} |
 
 ## Reproduce
 

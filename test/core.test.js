@@ -164,3 +164,50 @@ test('keeps a carriage-return-only message on a single table row', () => {
   assert.ok(row)
   assert.match(row, /throws Error: boom bang/)
 })
+
+test('keeps a backtick in the outcome inside a single code span', () => {
+  const result = check('backtick', {
+    ...quiet,
+    input: fc => fc.nat(),
+    subject: () => {
+      throw new Error('use `x` here')
+    },
+    reference: () => 'ok',
+  })
+  const row = formatReport(result)
+    .split('\n')
+    .find(line => line.startsWith('| Subject |'))
+  assert.ok(row)
+  assert.ok(row.includes('``throws Error: use `x` here``'))
+  assert.ok(!row.includes('\\`'))
+})
+
+test('keeps a run of backticks inside a single code span', () => {
+  const result = check('backtick run', {
+    ...quiet,
+    input: fc => fc.nat(),
+    subject: () => 'a `` b',
+    reference: () => 'z',
+  })
+  const row = formatReport(result)
+    .split('\n')
+    .find(line => line.startsWith('| Subject |'))
+  assert.ok(row)
+  assert.ok(row.includes('```"a `` b"```'))
+})
+
+test('pads a code span whose value ends with a backtick', () => {
+  const result = check('trailing backtick', {
+    ...quiet,
+    input: fc => fc.nat(),
+    subject: () => {
+      throw new Error('tail `')
+    },
+    reference: () => 'ok',
+  })
+  const row = formatReport(result)
+    .split('\n')
+    .find(line => line.startsWith('| Subject |'))
+  assert.ok(row)
+  assert.ok(row.includes('`` throws Error: tail ` ``'))
+})
