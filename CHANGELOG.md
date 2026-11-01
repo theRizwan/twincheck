@@ -5,6 +5,8 @@ Each release is listed here and on [GitHub Releases](https://github.com/theRizwa
 
 ## Unreleased
 
+- The Markdown report keeps an outcome containing `|` or a line break inside its table cell (#2, #7 by @bfs2021).
+
 ## 0.1.0 (2026-10-29)
 
 First release.
