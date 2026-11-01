@@ -42,3 +42,13 @@ If a pack finds a real bug in another project, report it to that project before 
 ## Licence
 
 By contributing you agree that your work is released under the MIT licence of this project.
+
+## Releasing (maintainers)
+
+1. Move the **Unreleased** entries in `CHANGELOG.md` under a new heading, `## x.y.z (YYYY-MM-DD)`, and commit.
+2. `npm version x.y.z` (bumps `package.json`, commits and creates the `vx.y.z` tag).
+3. `npm publish`
+4. `git push --follow-tags`
+
+Pushing the tag runs `.github/workflows/release.yml`, which creates the GitHub release from that version's changelog
+section. It fails if the tag and `package.json` disagree or the changelog has no section for the version.
