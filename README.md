@@ -24,6 +24,10 @@ twin('replace(string, string) matches String.prototype.replace', {
 `twin()` throws on the first disagreement, so it works inside any test runner (`node:test`, Vitest, Jest, Mocha).
 `check()` does the same work and returns the result instead of throwing.
 
+Both functions reject a spec whose `subject` and `reference` are the same function with a
+`TypeError` before generating inputs. Check your imports point to two different implementations;
+separate wrappers around the same implementation cannot be detected by this identity check.
+
 ## What it found
 
 The bundled `string-edit` pack, run against past magic-string releases (`npm run history`):

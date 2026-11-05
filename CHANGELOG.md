@@ -5,6 +5,9 @@ Each release is listed here and on [GitHub Releases](https://github.com/theRizwa
 
 ## Unreleased
 
+- Reject identical subject/reference functions before input generation, with an actionable `TypeError`
+  (#1 by @Doomguy-BFG9000).
+
 ## 0.1.3 (2026-11-05)
 
 - Validate `allow` entries before generating inputs, with a `TypeError` naming the invalid entry and field

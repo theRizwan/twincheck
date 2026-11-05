@@ -7,6 +7,42 @@ import { check, formatReport, twin, TwinMismatchError } from '../src/index.js'
 
 const quiet = { corpusDir: false, reportDir: false, seed: 1 }
 
+for (const run of [check, twin]) {
+  test(`${run.name} rejects identical functions before generating inputs`, () => {
+    let generated = false
+    let called = false
+    const same = value => {
+      called = true
+      return value
+    }
+    assert.throws(() => run('same implementation', {
+      ...quiet,
+      input: fc => {
+        generated = true
+        return fc.integer()
+      },
+      subject: same,
+      reference: same,
+    }), {
+      name: 'TypeError',
+      message: 'twincheck: subject and reference are the same function, so they can never disagree. Check that you imported two different implementations.',
+    })
+    assert.equal(generated, false)
+    assert.equal(called, false)
+  })
+}
+
+test('permits distinct wrappers around the same implementation', () => {
+  const implementation = value => value + 1
+  const result = check('separate wrappers', {
+    ...quiet,
+    input: fc => fc.integer(),
+    subject: value => implementation(value),
+    reference: value => implementation(value),
+  })
+  assert.equal(result.ok, true)
+})
+
 test('passes when subject and reference agree', () => {
   const result = check('sort', {
     ...quiet,

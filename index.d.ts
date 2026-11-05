@@ -52,7 +52,9 @@ export declare class TwinMismatchError<T = unknown> extends Error {
   result: TwinResult<T>
 }
 
+/** Throws TypeError before input generation if subject and reference are the same function. */
 export declare function check<T>(name: string, spec: TwinSpec<T>): TwinResult<T>
+/** Throws TypeError before input generation if subject and reference are the same function. */
 export declare function twin<T>(name: string, spec: TwinSpec<T>): TwinResult<T>
 export declare function agrees(a: Outcome, b: Outcome, equals?: (a: unknown, b: unknown) => boolean): boolean
 export declare function describe(outcome: Outcome): string

@@ -34,6 +34,9 @@ export function check(name, spec) {
   if (typeof subject !== 'function' || typeof reference !== 'function') {
     throw new TypeError('twincheck: subject and reference must both be functions')
   }
+  if (subject === reference) {
+    throw new TypeError('twincheck: subject and reference are the same function, so they can never disagree. Check that you imported two different implementations.')
+  }
   if (!Array.isArray(allow)) {
     throw new TypeError('twincheck: allow must be an array')
   }
