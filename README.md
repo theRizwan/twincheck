@@ -1,5 +1,7 @@
 # twincheck
 
+[![Test](https://github.com/theRizwan/twincheck/actions/workflows/test.yml/badge.svg)](https://github.com/theRizwan/twincheck/actions/workflows/test.yml)
+
 **Find the inputs where your library disagrees with the thing it is supposed to match.**
 
 twincheck runs your function and a trusted reference side by side on generated inputs. When they disagree, it shrinks
