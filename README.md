@@ -24,6 +24,9 @@ twin('replace(string, string) matches String.prototype.replace', {
 `twin()` throws on the first disagreement, so it works inside any test runner (`node:test`, Vitest, Jest, Mocha).
 `check()` does the same work and returns the result instead of throwing.
 
+See the [runnable Vitest example](examples/vitest/) for a complete test-runner setup
+using the local copy of twincheck.
+
 ## What it found
 
 The bundled `string-edit` pack, run against past magic-string releases (`npm run history`):

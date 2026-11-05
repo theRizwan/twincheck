@@ -1,0 +1,13 @@
+{
+  "name": "twincheck-vitest-example",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "fast-check": "^4.10.2",
+    "twincheck": "file:../..",
+    "vitest": "^4.1.12"
+  }
+}
