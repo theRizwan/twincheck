@@ -94,6 +94,7 @@ every later run, so a fixed bug stays fixed. Set `reportDir: false` or `corpusDi
 ## Packs
 
 A pack is a list of ready-made checks for one kind of library.
+Import `stringEdit` and its `NamedSpec` type from `twincheck/packs/string-edit`; they are not exported by `twincheck`.
 
 ```js
 import MagicString from 'magic-string'

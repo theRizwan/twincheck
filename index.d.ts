@@ -58,10 +58,3 @@ export declare function agrees(a: Outcome, b: Outcome, equals?: (a: unknown, b: 
 export declare function describe(outcome: Outcome): string
 export declare function formatSummary(result: TwinResult<unknown>): string
 export declare function formatReport(result: TwinResult<unknown>): string
-
-export interface NamedSpec<T> extends TwinSpec<T> {
-  name: string
-}
-
-/** From `twincheck/packs/string-edit`: checks that a string editor such as magic-string matches String.prototype. */
-export declare function stringEdit(MagicString: new (source: string) => any): NamedSpec<any>[]

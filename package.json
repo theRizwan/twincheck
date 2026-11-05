@@ -17,7 +17,7 @@
       "default": "./src/index.js"
     },
     "./packs/string-edit": {
-      "types": "./index.d.ts",
+      "types": "./packs/string-edit.d.ts",
       "default": "./src/packs/string-edit.js"
     }
   },
@@ -25,6 +25,7 @@
   "files": [
     "src",
     "index.d.ts",
+    "packs/string-edit.d.ts",
     "README.md",
     "LICENSE"
   ],
@@ -54,6 +55,7 @@
     "magic-string-1.2.3": "npm:magic-string@1.2.3",
     "magic-string-1.4.2": "npm:magic-string@1.4.2",
     "magic-string-1.4.3": "npm:magic-string@1.4.3",
-    "magic-string-1.4.4": "npm:magic-string@1.4.4"
+    "magic-string-1.4.4": "npm:magic-string@1.4.4",
+    "typescript": "5.9.3"
   }
 }
